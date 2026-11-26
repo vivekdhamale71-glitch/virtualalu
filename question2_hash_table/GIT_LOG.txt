@@ -1,0 +1,67 @@
+commit f15e33f2de1b844374e7b1af8410d52bf4653f3c
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-27 00:33:23 +0530
+
+    Add README and development journal with deliberate bug tests
+
+ question2_hash_table/DEBUG_JOURNAL.md | 155 ++++++++++++++++++++++++++++++++++
+ question2_hash_table/README.md        |  86 +++++++++++++++++++
+ 2 files changed, 241 insertions(+)
+
+commit 45c1087e5c5997fccae19d3b0b3841654392c8c6
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-27 00:28:15 +0530
+
+    Add program output and trace-match report
+
+ question2_hash_table/PREDICTION_WORKSHEET.md |   2 +-
+ question2_hash_table/TRACE_MATCH_REPORT.md   |  54 ++++++++++
+ question2_hash_table/actual_output.txt       | 155 +++++++++++++++++++++++++++
+ 3 files changed, 210 insertions(+), 1 deletion(-)
+
+commit 50186a221ed7d433c4a1a85e552117f2a2f84e8b
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-27 00:23:07 +0530
+
+    Add linear probing, duplicate check and final table output
+
+ question2_hash_table/mango_hash_table.cpp | 97 +++++++++++++++++++++++++++++++
+ 1 file changed, 97 insertions(+)
+
+commit 0cf7167e69884859e9940c56ed961c8751eee593
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-27 00:17:59 +0530
+
+    Add division-method hash function and print each key's index
+
+ question2_hash_table/mango_hash_table.cpp | 15 +++++++++++++++
+ 1 file changed, 15 insertions(+)
+
+commit 6f248008bb1766011eaa4da66dceae3be8157a89
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-27 00:08:09 +0530
+
+    Add hand-prediction worksheet before implementing hashing
+    
+
+ question2_hash_table/PREDICTION_WORKSHEET.md | 109 +++++++++++++++++++++++++++
+ 1 file changed, 109 insertions(+)
+
+commit d0246d8b61a8097f461d5650b6c585754bea3e3a
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-27 00:07:43 +0530
+
+    Add Q2 skeleton: personalization header and dataset generation
+    
+
+ question2_hash_table/mango_hash_table.cpp | 42 +++++++++++++++++++++++++++++++
+ 1 file changed, 42 insertions(+)
+
+commit 796200b85a7a6272eaf5ebeeaeb4a1735a52370f
+Author: Your Name <vivekdhamale63@gmail.com>
+Date:   2026-11-17 23:08:38 +0530
+
+    first commit
+
+ README.md | 1 +
+ 1 file changed, 1 insertion(+)
