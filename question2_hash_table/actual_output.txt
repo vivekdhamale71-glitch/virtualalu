@@ -1,0 +1,155 @@
+PRN 202501100156 | Mango Varieties | Seed S = 156
+
+Dataset (mango variety codes):
+  v[0] = 56
+  v[1] = 69
+  v[2] = 82
+  v[3] = 95
+  v[4] = 8
+  v[5] = 21
+  v[6] = 34
+  v[7] = 47
+  v[8] = 60
+  v[9] = 73
+  v[10] = 86
+  v[11] = 99
+  v[12] = 12
+  v[13] = 25
+  v[14] = 38
+  v[15] = 51
+  v[16] = 64
+  v[17] = 77
+  v[18] = 90
+  v[19] = 3
+
+Hash indices: h(key) = key mod 29
+  56 mod 29 = 27
+  69 mod 29 = 11
+  82 mod 29 = 24
+  95 mod 29 = 8
+  8 mod 29 = 8
+  21 mod 29 = 21
+  34 mod 29 = 5
+  47 mod 29 = 18
+  60 mod 29 = 2
+  73 mod 29 = 15
+  86 mod 29 = 28
+  99 mod 29 = 12
+  12 mod 29 = 12
+  25 mod 29 = 25
+  38 mod 29 = 9
+  51 mod 29 = 22
+  64 mod 29 = 6
+  77 mod 29 = 19
+  90 mod 29 = 3
+  3 mod 29 = 3
+
+Insertion with linear probing
+Insert 56: home index = 56 mod 29 = 27
+    stored in slot 27 after 1 probe(s)
+    Table: 27:56
+Insert 69: home index = 69 mod 29 = 11
+    stored in slot 11 after 1 probe(s)
+    Table: 11:69, 27:56
+Insert 82: home index = 82 mod 29 = 24
+    stored in slot 24 after 1 probe(s)
+    Table: 11:69, 24:82, 27:56
+Insert 95: home index = 95 mod 29 = 8
+    stored in slot 8 after 1 probe(s)
+    Table: 8:95, 11:69, 24:82, 27:56
+Insert 8: home index = 8 mod 29 = 8
+    collision: slot 8 holds 95, move to the next slot
+    stored in slot 9 after 2 probe(s)
+    Table: 8:95, 9:8, 11:69, 24:82, 27:56
+Insert 21: home index = 21 mod 29 = 21
+    stored in slot 21 after 1 probe(s)
+    Table: 8:95, 9:8, 11:69, 21:21, 24:82, 27:56
+Insert 34: home index = 34 mod 29 = 5
+    stored in slot 5 after 1 probe(s)
+    Table: 5:34, 8:95, 9:8, 11:69, 21:21, 24:82, 27:56
+Insert 47: home index = 47 mod 29 = 18
+    stored in slot 18 after 1 probe(s)
+    Table: 5:34, 8:95, 9:8, 11:69, 18:47, 21:21, 24:82, 27:56
+Insert 60: home index = 60 mod 29 = 2
+    stored in slot 2 after 1 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 11:69, 18:47, 21:21, 24:82, 27:56
+Insert 73: home index = 73 mod 29 = 15
+    stored in slot 15 after 1 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 11:69, 15:73, 18:47, 21:21, 24:82, 27:56
+Insert 86: home index = 86 mod 29 = 28
+    stored in slot 28 after 1 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 11:69, 15:73, 18:47, 21:21, 24:82, 27:56, 28:86
+Insert 99: home index = 99 mod 29 = 12
+    stored in slot 12 after 1 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 11:69, 12:99, 15:73, 18:47, 21:21, 24:82, 27:56, 28:86
+Insert 12: home index = 12 mod 29 = 12
+    collision: slot 12 holds 99, move to the next slot
+    stored in slot 13 after 2 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 11:69, 12:99, 13:12, 15:73, 18:47, 21:21, 24:82, 27:56, 28:86
+Insert 25: home index = 25 mod 29 = 25
+    stored in slot 25 after 1 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 11:69, 12:99, 13:12, 15:73, 18:47, 21:21, 24:82, 25:25, 27:56, 28:86
+Insert 38: home index = 38 mod 29 = 9
+    collision: slot 9 holds 8, move to the next slot
+    stored in slot 10 after 2 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 21:21, 24:82, 25:25, 27:56, 28:86
+Insert 51: home index = 51 mod 29 = 22
+    stored in slot 22 after 1 probe(s)
+    Table: 2:60, 5:34, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
+Insert 64: home index = 64 mod 29 = 6
+    stored in slot 6 after 1 probe(s)
+    Table: 2:60, 5:34, 6:64, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
+Insert 77: home index = 77 mod 29 = 19
+    stored in slot 19 after 1 probe(s)
+    Table: 2:60, 5:34, 6:64, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 19:77, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
+Insert 90: home index = 90 mod 29 = 3
+    stored in slot 3 after 1 probe(s)
+    Table: 2:60, 3:90, 5:34, 6:64, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 19:77, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
+Insert 3: home index = 3 mod 29 = 3
+    collision: slot 3 holds 90, move to the next slot
+    stored in slot 4 after 2 probe(s)
+    Table: 2:60, 3:90, 4:3, 5:34, 6:64, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 19:77, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
+
+Final hash table
+  Slot  Key
+  0     -
+  1     -
+  2     60
+  3     90
+  4     3
+  5     34
+  6     64
+  7     -
+  8     95
+  9     8
+  10    38
+  11    69
+  12    99
+  13    12
+  14    -
+  15    73
+  16    -
+  17    -
+  18    47
+  19    77
+  20    -
+  21    21
+  22    51
+  23    -
+  24    82
+  25    25
+  26    -
+  27    56
+  28    86
+
+Summary
+  Keys stored        : 20
+  Keys that collided : 4
+  Total probes       : 24
+  Load factor        : 20/29
+
+Duplicate check demo (not part of the dataset)
+Insert 38: home index = 38 mod 29 = 9
+    collision: slot 9 holds 8, move to the next slot
+    duplicate: 38 is already in slot 10, not stored again
+    Table: 2:60, 3:90, 4:3, 5:34, 6:64, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 19:77, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
