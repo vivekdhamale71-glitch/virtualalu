@@ -17,6 +17,7 @@ using namespace std;
 
 const int SEED = 156;
 const int N = 20;   // number of values in the dataset
+const int M = 29;   // table size: prime, load factor 20/29 = 0.69
 
 // Fill v[] using the formula given in the assignment.
 void makeDataset(int v[]) {
@@ -32,11 +33,25 @@ void printDataset(const int v[]) {
     }
 }
 
+// Division method: the remainder is always from 0 to M-1.
+// Keys are never negative here (they are 0..99).
+int hashKey(int key) {
+    return key % M;
+}
+
+void printHashIndices(const int v[]) {
+    cout << "\nHash indices: h(key) = key mod " << M << "\n";
+    for (int i = 0; i < N; i++) {
+        cout << "  " << v[i] << " mod " << M << " = " << hashKey(v[i]) << "\n";
+    }
+}
+
 int main() {
     int v[N];
     makeDataset(v);
 
     cout << "PRN 202501100156 | Mango Varieties | Seed S = " << SEED << "\n\n";
     printDataset(v);
+    printHashIndices(v);
     return 0;
 }
