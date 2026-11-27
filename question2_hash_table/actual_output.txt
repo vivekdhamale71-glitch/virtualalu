@@ -1,4 +1,15 @@
-PRN 202501100156 | Mango Varieties | Seed S = 156
+=== My values ===
+  PRN        : 202501100156
+  Scenario   : PRN mod 3 = 2 -> Mango varieties
+  Seed S     : last four digits (PRN mod 10000) = 156
+  Dataset    : v[i] = (156 + 13*i) mod 100, i = 0..19
+  PRN is     : even
+  Hash       : division method, key mod m
+  Collisions : linear probing
+
+=== Table size (my assumption) ===
+  m = 29, a prime number
+  Load factor = 20/29 = about 69% full
 
 Dataset (mango variety codes):
   v[0] = 56
@@ -148,8 +159,27 @@ Summary
   Total probes       : 24
   Load factor        : 20/29
 
+=== A collision: key 8 ===
+  Key 8: 8 mod 29 = 8
+    slot 8 is taken by 95 (home slot of 95 is 8)
+    it is in slot 9
+
+=== A knock-on collision: key 38 ===
+  Key 38: 38 mod 29 = 9
+    slot 9 is taken by 8 (home slot of 8 is 8)
+    it is in slot 10
+
 Duplicate check demo (not part of the dataset)
 Insert 38: home index = 38 mod 29 = 9
     collision: slot 9 holds 8, move to the next slot
     duplicate: 38 is already in slot 10, not stored again
     Table: 2:60, 3:90, 4:3, 5:34, 6:64, 8:95, 9:8, 10:38, 11:69, 12:99, 13:12, 15:73, 18:47, 19:77, 21:21, 22:51, 24:82, 25:25, 27:56, 28:86
+
+=== Wrap-around demo (test keys 28 and 57, not in my dataset) ===
+Insert 28: home index = 28 mod 29 = 28
+    stored in slot 28 after 1 probe(s)
+Insert 57: home index = 57 mod 29 = 28
+    collision: slot 28 holds 28, move to the next slot
+    stored in slot 0 after 2 probe(s)
+    Table: 0:57, 28:28
+  After slot 28, (28 + 1) % 29 = 0, so the search continues at slot 0.

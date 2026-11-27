@@ -15,7 +15,8 @@
 #include <iostream>
 using namespace std;
 
-const int SEED = 156;
+const long long PRN = 202501100156LL;
+const int SEED = PRN % 10000;   // last four digits: 0156 = 156
 const int N = 20;   // number of values in the dataset
 const int M = 29;   // table size: prime, load factor 20/29 = 0.69
 const int EMPTY = -1; // marks a free slot (real codes are 0..99)
@@ -111,11 +112,63 @@ void printFinalTable(const int table[]) {
     }
 }
 
+// Show how the personal values come from the PRN, and why m = 29.
+void printPersonalValues() {
+    bool even = (PRN % 2 == 0);
+
+    cout << "=== My values ===\n";
+    cout << "  PRN        : " << PRN << "\n";
+    cout << "  Scenario   : PRN mod 3 = " << PRN % 3 << " -> Mango varieties\n";
+    cout << "  Seed S     : last four digits (PRN mod 10000) = " << SEED << "\n";
+    cout << "  Dataset    : v[i] = (" << SEED << " + 13*i) mod 100, i = 0.."
+         << N - 1 << "\n";
+    cout << "  PRN is     : " << (even ? "even" : "odd") << "\n";
+    cout << "  Hash       : division method, key mod m\n";
+    cout << "  Collisions : linear probing\n";
+
+    cout << "\n=== Table size (my assumption) ===\n";
+    cout << "  m = " << M << ", a prime number\n";
+    cout << "  Load factor = " << N << "/" << M << " = about "
+         << (N * 100 + M / 2) / M << "% full\n\n";
+}
+
+// Follow a stored key from its home slot to the slot where it ended up.
+void showKeyPath(const int table[], int key) {
+    int home = hashKey(key);
+    cout << "  Key " << key << ": " << key << " mod " << M << " = " << home
+         << "\n";
+
+    for (int step = 0; step < M; step++) {
+        int index = (home + step) % M;
+        if (table[index] == key) {
+            cout << "    it is in slot " << index << "\n";
+            return;
+        }
+        cout << "    slot " << index << " is taken by " << table[index]
+             << " (home slot of " << table[index] << " is "
+             << hashKey(table[index]) << ")\n";
+    }
+}
+
+// Separate small table with two test keys, to show probing from 28 to 0.
+void wrapAroundDemo() {
+    int test[M];
+    initTable(test);
+    int probes;
+
+    cout << "\n=== Wrap-around demo (test keys 28 and 57, not in my dataset) ===\n";
+    insertKey(test, 28, probes);
+    insertKey(test, 57, probes);
+    printOccupied(test);
+    cout << "  After slot " << M - 1 << ", (" << M - 1 << " + 1) % " << M
+         << " = 0, so the search continues at slot 0.\n";
+}
+
 int main() {
     int v[N];
     makeDataset(v);
 
-    cout << "PRN 202501100156 | Mango Varieties | Seed S = " << SEED << "\n\n";
+    printPersonalValues();
     printDataset(v);
     printHashIndices(v);
 
@@ -143,12 +196,20 @@ int main() {
     cout << "  Total probes       : " << totalProbes << "\n";
     cout << "  Load factor        : " << stored << "/" << M << "\n";
 
+    cout << "\n=== A collision: key 8 ===\n";
+    showKeyPath(table, 8);
+
+    cout << "\n=== A knock-on collision: key 38 ===\n";
+    showKeyPath(table, 38);
+
     // The dataset has no repeated values, so try one again to show the check.
     // 38 is useful because it was moved away from its home slot.
     cout << "\nDuplicate check demo (not part of the dataset)\n";
     int probes;
     insertKey(table, 38, probes);
     printOccupied(table);
+
+    wrapAroundDemo();
 
     return 0;
 }

@@ -153,3 +153,14 @@ that an AI assistant did the work. No predicted values changed.
 
 The README and this journal go in the next commit, followed by the
 `git log --stat` export. Pushes stay at least 5 minutes apart.
+
+## 2026-11-27 about 05:28: explanations added to the terminal output
+
+- At the owner's request, the program now also prints the personal values, the
+  table size reason, the collision paths of keys 8 and 38, and a wrap-around
+  demo (test keys 28 and 57, separate table). The seed is now calculated from
+  the PRN in the code.
+- Compiled with no warnings. A run with
+  `-fsanitize=address,undefined` exited with code 0.
+- Saved the new `actual_output.txt` and repeated the trace comparison: still no
+  differences in 20 steps and 20 table states. Insertion logic was not changed.
