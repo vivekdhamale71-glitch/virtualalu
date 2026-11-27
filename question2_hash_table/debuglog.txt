@@ -1,0 +1,134 @@
+Debugging Log: Question 2 Hash Table
+
+PRN: 202501100156 | Mango varieties | S = 156 | division method (key mod 29) |
+linear probing
+
+One entry per commit, oldest first. The work and this log were prepared by an AI
+assistant. Only real results are recorded. Longer notes and full test details are
+in DEBUG_JOURNAL.md; commit times are in GIT_LOG.txt.
+
+The earlier commit 796200b ("first commit") was in the repository before this
+task and is not covered.
+
+No compile error, compiler warning or wrong result occurred by accident in any
+build during development. The failed approaches in this log were tried on
+purpose, as tests.
+
+Commit 1: dfde00c, personalization header and dataset
+
+- Done: header comment and dataset generation.
+- Check: compiled with -Wall -Wextra -Wpedantic and ran.
+- Result: no warnings. All 20 values matched the hand calculation.
+
+Commit 2: 8775621, hand-prediction worksheet
+
+- Done: predicted all indices, collisions and table states before any hashing
+  code existed.
+- Check: document only, nothing to compile. It was compared with the program
+  later (commit 5).
+
+Commit 3: bde47d3, division-method hash function
+
+- Done: added m = 29, hashKey() and printing of each index.
+- Check: compiled and ran before committing.
+- Result: no warnings. All 20 indices matched the worksheet.
+- Note: committed later than written, because commits were on hold. A saved
+  copy of this version was committed.
+
+Commit 4: ca4e6ef, linear probing and duplicate check
+
+- Done: insertKey() with wrap-around, duplicate check and a limit of 29
+  probes; final table and summary.
+- Check: compiled and ran.
+- Result: no warnings. 20 keys stored, 4 collided, 24 probes.
+
+Failed approaches (deliberate tests of this code)
+
+These were run on temporary copies after the code was written and before it was
+committed. The committed program never contained these bugs.
+
+Failed approach A: probing with home + step, without % m.
+
+- First try, testing with my dataset only: the test failed to find the bug.
+  The output was identical to the correct program, because no key probes past
+  slot 28.
+- Second try, with test keys 28 and 57 and -fsanitize=address,undefined: the
+  buggy copy stopped with stack-buffer-overflow (it read table[29]).
+- Correct code: (home + step) % M. Key 57 goes to slot 0.
+- Learned: wrap-around needs its own test input.
+
+Failed approach B: probing without a duplicate check.
+
+- Inserting 38 again stored a second copy in slot 14; the first is in slot 10.
+  The buggy copy showed no error and exited with code 0.
+- Correct code: stop when a probed slot already holds the key. Checking only the
+  home slot would not work, because 38 is not in its home slot.
+
+Failed approach C: probe loop with no limit.
+
+- With keys 0 to 28 filling the table, inserting 29 never returned. timeout 2
+  stopped it (exit code 124).
+- Correct code: at most 29 probes, then report "table full".
+
+Commit 5: 33b6cad, program output and trace-match report
+
+- Done: saved the output and wrote the trace-match report.
+- Check: used diff on 20 insertion steps and 20 table states.
+- Result: no differences.
+- Also: removed the assistant's product name from the documents.
+
+Commit 6: 717e47e, README and development journal
+
+- Done: added the README and the dated journal, including the tests above.
+- Check: rebuilt the program; its output matched actual_output.txt.
+
+Commit 7: 7260f1f, git log export
+
+- Done: added GIT_LOG.txt from git log --stat --date=iso.
+- Check: a fresh clone built with no errors and its output matched
+  actual_output.txt. The export lists the 7 commits before this one, including
+  the earlier "first commit". It cannot list its own commit.
+
+Commit 8: "Show viva explanations in terminal output"
+
+- Done: the program now prints the personal values, table size reason,
+  collision paths of keys 8 and 38, and a wrap-around demo. The seed is
+  calculated from the PRN. Insertion logic is unchanged.
+- Check: compiled and ran, plus a run with -fsanitize=address,undefined.
+- Result: no warnings; both runs exited with code 0. The trace comparison
+  still shows no differences.
+
+Commit 9: "Add per-commit debugging log"
+
+- Done: added this file, listed it in the README, and updated one sentence in
+  the trace-match report to cover the new output sections.
+- Check: documents only, no code change.
+
+Commit 10: "Use setw to align the final table"
+
+- Done: replaced the hand-typed spacing in printFinalTable() with setw.
+- Check: compiled, ran and compared the output with actual_output.txt.
+- Result: no warnings; output identical.
+
+Commit 11: "Clean up source file"
+
+- Done: trimmed the inline notes from the source file. The header block with
+  the PRN and personalization values is unchanged.
+- Check: compiled, ran and compared the output with actual_output.txt.
+- Result: no warnings; output identical.
+
+Commit 12: "Update git log export"
+
+- Done: regenerated GIT_LOG.txt to include commits 8 to 11. It cannot list
+  its own commit.
+
+Commit 13: "Update commit IDs and git log export"
+
+- Done: at the owner's request, history was rewritten to remove an automatic
+  co-author line from two commit messages, and the same name from old versions of
+  the worksheet and git log export. This changed the IDs of this task's commits.
+  This commit updates the IDs in the documents and regenerates GIT_LOG.txt.
+  It cannot list its own commit.
+- Check: commit dates were compared before and after: unchanged. The only
+  difference in the latest files from the rewrite was two removed lines in
+  GIT_LOG.txt.
